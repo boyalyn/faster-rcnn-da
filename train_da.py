@@ -43,8 +43,8 @@ def eval(dataloader, faster_rcnn, test_num=10000):
 def train(opt):
 
     print('load data')
-    src_dataset = JACSDatasetBase(root="/Users/boyaliu/Projects/JACS/Database/data_FHPB/trainset",
-                              anno_file="trainset.json")
+    src_dataset = JACSDatasetBase(root=opt.train_root,
+                              anno_file=opt.train_anno_file)
     
     src_dataloader = data_.DataLoader(src_dataset, \
                                   batch_size=1, \
@@ -52,8 +52,8 @@ def train(opt):
                                   # pin_memory=True,
                                   num_workers=opt.num_workers)
     
-    dst_dataset = JACSDatasetBase(root="/Users/boyaliu/Projects/JACS/Database/data_FHPB/Testset",
-                              anno_file="testset_0.json")
+    dst_dataset = JACSDatasetBase(root=opt.test_root,
+                              anno_file=opt.test_anno_file)
     dst_dataloader = data_.DataLoader( dst_dataset,
                                        batch_size=1,
                                        num_workers=opt.test_num_workers,
@@ -69,8 +69,6 @@ def train(opt):
     if opt.load_path:
         trainer.load(opt.load_path)
         print('load pretrained model from %s' % opt.load_path)
-    
-    # trainer.vis.text(dataset.db.label_names, win='labels')
 
     # lr_ = opt.lr
     src_iterator = iter(src_dataloader)
@@ -79,8 +77,6 @@ def train(opt):
     for ii in range(opt.iter):
 
         print(f"iteration {ii}:\n")
-
-        # initialize best map
         best_map = 0.0
 
         try:
@@ -93,9 +89,6 @@ def train(opt):
         img, bbox, label = img.to(opt.device).float(), bbox_.to(opt.device), label_.to(opt.device)
         print("train source")
         trainer.train_step(img, bbox, label, scale, "source")
-
-        # if ii%opt.interval == 0:
-        #     print(trainer.get_meter_data())
 
         try:
             img, bbox_, label_, scale = dst_iterator.next()
@@ -130,16 +123,9 @@ def train(opt):
             # trainer.vis.log(log_info)
             print(log_info_test)
 
-
-
-
             if eval_result_test['map'] > best_map:
                 best_map = eval_result_test['map']
                 best_path = trainer.save(best_map=best_map)
-            # if epoch == 9:
-            #     trainer.load(best_path)
-            #     trainer.faster_rcnn.scale_lr(opt.lr_decay)
-            #     lr_ = lr_ * opt.lr_decay
             
 
 if __name__ == "__main__":
