@@ -80,10 +80,11 @@ def train(opt):
         best_map = 0.0
 
         try:
-            img, bbox_, label_, scale = src_iterator.next()
+            img, bbox_, label_, scale = next(src_iterator)
         except:
+            # print("source iterator ended")
             src_iterator = iter(src_dataloader)
-            img, bbox_, label_, scale = src_iterator.next()
+            img, bbox_, label_, scale = next(src_iterator)
 
         scale = at.scalar(scale)
         img, bbox, label = img.to(opt.device).float(), bbox_.to(opt.device), label_.to(opt.device)
@@ -91,10 +92,11 @@ def train(opt):
         trainer.train_step(img, bbox, label, scale, "source")
 
         try:
-            img, bbox_, label_, scale = dst_iterator.next()
+            img, bbox_, label_, scale = next(dst_iterator)
         except:
+            print("target iterator ended")
             dst_iterator = iter(dst_dataloader)
-            img, bbox_, label_, scale = dst_iterator.next()
+            img, bbox_, label_, scale = next(dst_iterator)
 
         scale = at.scalar(scale)
         img, bbox, label = img.to(opt.device).float(), bbox_.to(opt.device), label_.to(opt.device)
