@@ -135,8 +135,8 @@ class RegionProposalNetwork(nn.Module):
         roi_indices = np.concatenate(roi_indices, axis=0)
 
         # put rois and roi indices into cuda
-        rois = t.from_numpy(rois, device=Config().device)
-        roi_indices = t.from_numpy(roi_indices, device=Config().device)
+        rois = t.from_numpy(rois).to(Config().device)
+        roi_indices = t.from_numpy(roi_indices).to(Config().device)
 
         return rpn_locs, rpn_scores, rois, roi_indices, anchor
 
