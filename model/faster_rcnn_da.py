@@ -10,6 +10,7 @@ from model.da_loss_func.da_img_loss import DaImgLoss
 from model.da_loss_func.da_ins_loss import DaInsLoss
 from model.utils.bbox_tools import bbox2loc, loc2bbox
 from Utils import array_tool as at
+from Configs.Config import Config
 
 class DANN(FasterRCNN):
 
@@ -83,6 +84,9 @@ class DANN(FasterRCNN):
             da_ins_label = torch.ones_like(da_ins_features)
             # da_img_label = torch.ones_like(da_img_features)
             da_img_label = torch.ones(da_img_features[0].shape[0])
+
+        da_ins_label = da_ins_label.to(Config().device)
+        da_img_label = da_img_label.to(Config().device)
 
         losses = self.compute_losses(da_outputs, da_ins_label, da_img_label)
 
