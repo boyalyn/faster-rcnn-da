@@ -6,7 +6,7 @@ from torch import nn
 from model.utils.bbox_tools import generate_anchor_base
 from model.utils.creator_tool import ProposalCreator
 
-from Configs.Config import Config as cfg
+from Configs.Config import Config
 
 
 class RegionProposalNetwork(nn.Module):
@@ -135,8 +135,8 @@ class RegionProposalNetwork(nn.Module):
         roi_indices = np.concatenate(roi_indices, axis=0)
 
         # put rois and roi indices into cuda
-        rois = t.from_numpy(rois, device=cfg.device)
-        roi_indices = t.from_numpy(roi_indices, device=cfg.device)
+        rois = t.from_numpy(rois, device=Config().device)
+        roi_indices = t.from_numpy(roi_indices, device=Config().device)
 
         return rpn_locs, rpn_scores, rois, roi_indices, anchor
 
