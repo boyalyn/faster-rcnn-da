@@ -148,9 +148,9 @@ class FasterRCNNTrainer(nn.Module):
             img_size)
         gt_rpn_label = at.totensor(gt_rpn_label).long()
         gt_rpn_loc = at.totensor(gt_rpn_loc)
-        print(type(rpn_loc))
-        print(type(gt_rpn_loc))
-        print(type(gt_rpn_label.data))
+        print(rpn_loc.device)
+        print(gt_rpn_loc.device)
+        print(gt_rpn_label.data.device)
         rpn_loc_loss = _fast_rcnn_loc_loss(
             rpn_loc,
             gt_rpn_loc,
