@@ -251,16 +251,13 @@ class FasterRCNN(nn.Module):
             roi = roi.view(-1, 1, 4).expand_as(roi_cls_loc)
             cls_bbox = loc2bbox(at.tonumpy(roi).reshape((-1, 4)),
                                 at.tonumpy(roi_cls_loc).reshape((-1, 4)))
-            cls_bbox = at.totensor(cls_bbox)
+            cls_bbox = at.totensor(cls_bbox).to(DEVICE)
             cls_bbox = cls_bbox.view(-1, self.n_class * 4)
             # clip bounding box
             cls_bbox[:, 0::2] = (cls_bbox[:, 0::2]).clamp(min=0, max=size[0])
             cls_bbox[:, 1::2] = (cls_bbox[:, 1::2]).clamp(min=0, max=size[1])
 
             prob = (F.softmax(at.totensor(roi_score), dim=1))
-
-            print(cls_bbox.device)
-            print(prob[0].device)
 
             bbox, label, score = self._suppress(cls_bbox, prob)
             bboxes.append(bbox)
