@@ -127,11 +127,12 @@ class FasterRCNNTrainer(nn.Module):
         # it's fine to break the computation graph of rois, 
         # consider them as constant input
         sample_roi, gt_roi_loc, gt_roi_label = self.proposal_target_creator(
-            roi,
+            at.tonumpy(roi),
             at.tonumpy(bbox),
             at.tonumpy(label),
             self.loc_normalize_mean,
             self.loc_normalize_std)
+        
         # NOTE it's all zero because now it only support for batch=1 now
         sample_roi_index = t.zeros(len(sample_roi))
         roi_cls_loc, roi_score = self.faster_rcnn.head(
