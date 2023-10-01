@@ -21,6 +21,7 @@ def eval(dataloader, faster_rcnn, test_num=10000):
     pred_bboxes, pred_labels, pred_scores = list(), list(), list()
     gt_bboxes, gt_labels, gt_difficults = list(), list(), list()
     for ii, (imgs, gt_bboxes_, gt_labels_, _) in tqdm(enumerate(dataloader)):
+        imgs, gt_bboxes_, gt_labels_ = imgs.to(opt.device).float(), gt_bboxes_.to(opt.device), gt_labels_.to(opt.device)
         gt_difficults = None
         sizes = imgs.shape
         sizes = [sizes[2], sizes[3]]
