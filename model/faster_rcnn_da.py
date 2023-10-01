@@ -81,7 +81,7 @@ class DANN(FasterRCNN):
             # da_img_label = torch.zeros_like(da_img_features[0][:,:,])
             da_img_label = torch.zeros(da_img_features[0].shape[0])
         else:
-            da_ins_label = torch.ones_like(da_ins_features)
+            da_ins_label = torch.ones_like(da_ins_features,dtype=torch.cuda.FloatTensor)
             # da_img_label = torch.ones_like(da_img_features)
             da_img_label = torch.ones(da_img_features[0].shape[0])
 

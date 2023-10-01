@@ -7,11 +7,8 @@ class DaInsLoss(nn.Module):
     
     def __call__(self, da_ins_features, da_ins_labels):
 
-        print(da_ins_features.device)
-        print(da_ins_labels.device)
-
         da_ins_loss = F.binary_cross_entropy_with_logits(
-            torch.squeeze(da_ins_features), torch.squeeze(da_ins_labels.type(torch.FloatTensor))
+            torch.squeeze(da_ins_features), torch.squeeze(da_ins_labels)
         )
 
         return da_ins_loss
