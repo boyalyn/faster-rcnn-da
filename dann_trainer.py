@@ -146,11 +146,9 @@ class FasterRCNNTrainer(nn.Module):
             at.tonumpy(bbox),
             anchor,
             img_size)
-        gt_rpn_label = at.totensor(gt_rpn_label).long()
-        gt_rpn_loc = at.totensor(gt_rpn_loc)
-        print(rpn_loc.device)
-        print(gt_rpn_loc.device)
-        print(gt_rpn_label.data.device)
+        gt_rpn_label = at.totensor(gt_rpn_label).long().to(opt.device)
+        gt_rpn_loc = at.totensor(gt_rpn_loc).to(opt.device)
+
         rpn_loc_loss = _fast_rcnn_loc_loss(
             rpn_loc,
             gt_rpn_loc,
