@@ -166,8 +166,8 @@ class FasterRCNNTrainer(nn.Module):
         roi_cls_loc = roi_cls_loc.view(n_sample, -1, 4)
         roi_loc = roi_cls_loc[t.arange(0, n_sample).long().to(opt.device), \
                               at.totensor(gt_roi_label).long()]
-        gt_roi_label = at.totensor(gt_roi_label).long()
-        gt_roi_loc = at.totensor(gt_roi_loc)
+        gt_roi_label = at.totensor(gt_roi_label).long().to(opt.device)
+        gt_roi_loc = at.totensor(gt_roi_loc).to(opt.device)
 
         roi_loc_loss = _fast_rcnn_loc_loss(
             roi_loc.contiguous(),
