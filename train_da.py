@@ -26,8 +26,8 @@ def eval(dataloader, faster_rcnn, test_num=10000):
         sizes = imgs.shape
         sizes = [sizes[2], sizes[3]]
         pred_bboxes_, pred_labels_, pred_scores_ = faster_rcnn.predict(imgs, [sizes])
-        gt_bboxes += list(gt_bboxes_.numpy())
-        gt_labels += list(gt_labels_.numpy())
+        gt_bboxes += list(gt_bboxes_.cpu().numpy())
+        gt_labels += list(gt_labels_.cpu().numpy())
         # gt_difficults += list(gt_difficults_.numpy())
         pred_bboxes += pred_bboxes_
         pred_labels += pred_labels_
@@ -37,7 +37,7 @@ def eval(dataloader, faster_rcnn, test_num=10000):
     result = eval_detection_voc(
         pred_bboxes, pred_labels, pred_scores,
         gt_bboxes, gt_labels, gt_difficults,
-        use_07_metric=True)
+        use_07_metric=False)
     return result
 
 
