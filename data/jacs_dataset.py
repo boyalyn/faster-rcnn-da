@@ -32,6 +32,7 @@ class JACSDatasetBase(Dataset):
                    "width": img_dict["width"],
                    "instances": []}
             data_dic[key] = val
+            break
 
         for anno_dict in anno_list:
             img_id = anno_dict["image_id"]
@@ -42,6 +43,7 @@ class JACSDatasetBase(Dataset):
             cur_dict = {"bbox": bbox,
                         "cls": cls}
             data_dic[img_id]["instances"].append(cur_dict)
+            break
 
         self.data_dic = data_dic
         self.data_ids = list(data_dic.keys())
