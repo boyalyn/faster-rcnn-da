@@ -64,7 +64,7 @@ class DANN(FasterRCNN):
             h, rois, roi_indices, return_latent=True)
 
         # da_img_features, da_img_consist_features, da_ins_features, da_ins_center, da_ins_consist_features = self.da_head(fc7, [h])
-        da_outputs = self.da_head(roi_cls_loc,[h]) # caution !!!!!!!!!!!!!!
+        da_outputs = self.da_head(roi_cls_locs,[h]) # caution !!!!!!!!!!!!!!
         da_img_features, da_img_consist_features, da_ins_features, da_ins_center, da_ins_consist_features = da_outputs
 
         # create domain labels
