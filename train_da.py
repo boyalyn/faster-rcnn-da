@@ -128,9 +128,9 @@ def train(opt):
             # trainer.vis.log(log_info)
             print(log_info_test)
 
-            if eval_result_test['map'] > best_map:
-                best_map = eval_result_test['map']
-                best_path = trainer.save(best_map=best_map)
+            # if eval_result_test['map'] > best_map:
+            #     best_map = eval_result_test['map']
+            #     best_path = trainer.save(best_map=best_map)
             
 
 if __name__ == "__main__":
