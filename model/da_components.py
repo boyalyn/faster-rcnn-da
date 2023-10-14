@@ -58,7 +58,8 @@ class DAImgHead(nn.Module):
         super(DAImgHead, self).__init__()
         # conv layers
         self.conv1_da = nn.Conv2d(in_channels, 512, kernel_size=3, stride=1,padding=1)
-        self.conv2_da = nn.Conv2d(512, 1, kernel_size=1, stride=1)
+        self.conv2_da = nn.Conv2d(in_channels, 256, kernel_size=3, stride=1,padding=1)
+        self.conv3_da = nn.Conv2d(256, 1, kernel_size=1, stride=1)
         # initialize conv layers
         for l in [self.conv1_da, self.conv2_da]:
             torch.nn.init.normal_(l.weight, std=0.001)
@@ -71,7 +72,8 @@ class DAImgHead(nn.Module):
         # collect features from each level
         for feature in x:
             t = F.relu(self.conv1_da(feature))
-            img_features.append(self.conv2_da(t))
+            t = F.relu(self.conv2_da(t))
+            img_features.append(self.conv3_da(t))
 
         return img_features
 
