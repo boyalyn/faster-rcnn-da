@@ -269,7 +269,8 @@ def calc_detection_voc_ap(prec, rec, use_07_metric=False):
         :obj:`None`, the corresponding value is set to :obj:`numpy.nan`.
 
     """
-
+    print("prec: ", prec)
+    print("rec: ", rec)
     n_fg_class = len(prec)
     ap = np.empty(n_fg_class)
     for l in six.moves.range(n_fg_class):
