@@ -50,13 +50,13 @@ class RegionProposalNetwork(nn.Module):
             proposal_creator_params=dict(),
     ):
         super(RegionProposalNetwork, self).__init__()
-        ratios = [
+        self.ratios = [
             nn.Parameter(t.tensor(0.5),requires_grad=True),
             nn.Parameter(t.tensor(1.0),requires_grad=True),
             nn.Parameter(t.tensor(2.0),requires_grad=True)
         ]
         self.anchor_base = generate_anchor_base(
-            anchor_scales=anchor_scales, ratios=ratios)
+            anchor_scales=anchor_scales, ratios=self.ratios)
         self.feat_stride = feat_stride
         self.proposal_layer = ProposalCreator(self, **proposal_creator_params)
         n_anchor = self.anchor_base.shape[0]
@@ -68,6 +68,7 @@ class RegionProposalNetwork(nn.Module):
         normal_init(self.loc, 0, 0.01)
 
     def forward(self, x, img_size, scale=1.):
+        print("ratios: ", self.ratios)
         """Forward Region Proposal Network.
 
         Here are notations.
