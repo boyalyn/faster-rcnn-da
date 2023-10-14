@@ -45,7 +45,7 @@ class RegionProposalNetwork(nn.Module):
 
     def __init__(
             self, in_channels=512, mid_channels=512, ratios=[0.5, 1, 2],
-            anchor_scales=[2, 4, 8, 16, 32], feat_stride=16,
+            anchor_scales=[16, 32, 64], feat_stride=32,
             proposal_creator_params=dict(),
     ):
         super(RegionProposalNetwork, self).__init__()
