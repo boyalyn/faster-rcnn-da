@@ -71,8 +71,8 @@ class DAImgHead(nn.Module):
         img_features = []
         # collect features from each level
         for feature in x:
-            t = F.relu(self.conv1_da(feature))
-            t = F.relu(self.conv2_da(t))
+            t = F.relu(self.conv1_da(feature),inplace=True)
+            t = F.relu(self.conv2_da(t),inplace=True)
             img_features.append(self.conv3_da(t))
 
         return img_features

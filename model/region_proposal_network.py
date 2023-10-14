@@ -106,7 +106,7 @@ class RegionProposalNetwork(nn.Module):
             self.feat_stride, hh, ww)
 
         n_anchor = anchor.shape[0] // (hh * ww)
-        h = F.relu(self.conv1(x))
+        h = F.relu(self.conv1(x),inplace=True)
 
         rpn_locs = self.loc(h)
         # UNNOTE: check whether need contiguous
