@@ -63,7 +63,6 @@ class DANN(FasterRCNN):
         roi_cls_locs, roi_scores, fc7 = self.head(
             h, rois, roi_indices, return_latent=True)
 
-        print("roi_cls_locs",roi_cls_locs.shape)
         # da_img_features, da_img_consist_features, da_ins_features, da_ins_center, da_ins_consist_features = self.da_head(fc7, [h])
         da_outputs = self.da_head(roi_cls_locs,[h]) # caution !!!!!!!!!!!!!!
         da_img_features, da_img_consist_features, da_ins_features, da_ins_center, da_ins_consist_features = da_outputs
