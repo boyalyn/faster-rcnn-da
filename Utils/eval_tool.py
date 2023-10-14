@@ -163,8 +163,8 @@ def calc_detection_voc_prec_rec(
                 pred_bboxes, pred_labels, pred_scores,
                 gt_bboxes, gt_labels, gt_difficults):
         
-        print("pred_bbox: ", pred_bbox)
-        print("gt_bbox: ", gt_bbox)
+        # print("pred_bbox: ", pred_bbox)
+        # print("gt_bbox: ", gt_bbox)
 
         if gt_difficult is None:
             gt_difficult = np.zeros(gt_bbox.shape[0], dtype=bool)
