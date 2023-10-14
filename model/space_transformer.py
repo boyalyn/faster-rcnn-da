@@ -6,16 +6,12 @@ import torch.nn.functional as F
 class Deformer(nn.Module):
     def __init__(self):
         super(Deformer, self).__init__()
-        self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
-        self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
-        self.conv2_drop = nn.Dropout2d()
-
         # Spatial transformer localization-network
         self.localization = nn.Sequential(
-            nn.Conv2d(1, 10, kernel_size=3, padding=1),
+            nn.Conv2d(1, 32, kernel_size=3, padding=1),
             # nn.MaxPool2d(2, stride=2),
             nn.ReLU(True),
-            nn.Conv2d(10, 10, kernel_size=4),
+            nn.Conv2d(32, 10, kernel_size=4),
             # nn.MaxPool2d(2, stride=2),
             nn.ReLU(True)
         )
