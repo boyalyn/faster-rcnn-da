@@ -52,7 +52,7 @@ class RegionProposalNetwork(nn.Module):
         super(RegionProposalNetwork, self).__init__()
         ratios = [
             nn.Parameter(t.tensor(0.5),requires_grad=True),
-            nn.Parameter(t.tenfor(1),requires_grad=True),
+            nn.Parameter(t.tensor(1),requires_grad=True),
             nn.Parameter(t.tensor(2),requires_grad=True)
         ]
         self.anchor_base = generate_anchor_base(
