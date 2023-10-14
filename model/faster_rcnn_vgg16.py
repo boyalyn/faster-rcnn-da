@@ -148,8 +148,8 @@ class VGG16RoIHead(nn.Module):
 
         pool = self.roi(x, indices_and_rois)
 
-        pool = self.deforme1(pool.view(-1,1,7,7)).view(-1,512,7,7)
-        pool = self.deforme2(pool.view(-1,1,7,7)).view(-1,512,7,7)
+        pool = self.deformer1(pool.view(-1,1,7,7)).view(-1,512,7,7)
+        pool = self.deformer2(pool.view(-1,1,7,7)).view(-1,512,7,7)
 
         pool = pool.view(pool.size(0), -1)
         fc7 = self.classifier(pool)
