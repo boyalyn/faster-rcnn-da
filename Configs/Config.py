@@ -34,8 +34,8 @@ class Config:
         """ data path """
         self.train_root = "/content/drive/MyDrive/AI_for_materials/JACS/Database/data_FHPB/trainset"
         self.train_anno_file = "trainset.json"
-        self.test_root = "/content/drive/MyDrive/AI_for_materials/JACS/Database/data_FHPB/Testset"
-        self.test_anno_file = "testset_0.json"
+        self.test_root = "/content/drive/MyDrive/AI_for_materials/JACS/Database/data_FHPB/TestsetLR"
+        self.test_anno_file = "testset.json"
 
     def get_opt(self):
         return self
