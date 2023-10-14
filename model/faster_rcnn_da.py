@@ -11,6 +11,7 @@ from model.da_loss_func.da_ins_loss import DaInsLoss
 from model.utils.bbox_tools import bbox2loc, loc2bbox
 from Utils import array_tool as at
 from Configs.Config import Config
+torch.set_default_datatype(torch.float32)
 
 class DANN(FasterRCNN):
 

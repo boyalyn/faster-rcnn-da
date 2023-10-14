@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from .utils.gradient_reverse import GradientScalarLayer
+torch.set_default_datatype(torch.float32)
 
 
 class DAHead(nn.Module):
@@ -97,10 +98,10 @@ class DAInsHead(nn.Module):
 
     def forward(self, x):
 
-        x = F.relu(self.fc1_da(x))
+        x = F.relu(self.fc1_da(x),inplace=True)
         x = F.dropout(x, p=0.5, training=self.training)
 
-        x = F.relu(self.fc2_da(x))
+        x = F.relu(self.fc2_da(x),inplace=True)
         x = F.dropout(x, p=0.5, training=self.training) #(256, 1024)
 
         x1 = self.fc3_da(x)
