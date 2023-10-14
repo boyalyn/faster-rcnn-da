@@ -234,8 +234,8 @@ def generate_anchor_base(base_size=16, ratios=[0.5, 1, 2],
                            dtype=np.float32)
     for i in six.moves.range(len(ratios)):
         for j in six.moves.range(len(anchor_scales)):
-            h = base_size * anchor_scales[j] * torch.sqrt(ratios[i])
-            w = base_size * anchor_scales[j] * torch.sqrt(1. / ratios[i])
+            h = base_size * anchor_scales[j] * np.sqrt(ratios[i])
+            w = base_size * anchor_scales[j] * np.sqrt(1. / ratios[i])
 
             index = i * len(anchor_scales) + j
             anchor_base[index, 0] = py - h / 2.
