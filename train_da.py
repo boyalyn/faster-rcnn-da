@@ -18,7 +18,7 @@ from Configs.Config import Config
 
 
 def eval(dataloader, faster_rcnn, test_num=10000):
-    print("predicting...")
+    # print("predicting...")
     pred_bboxes, pred_labels, pred_scores = list(), list(), list()
     gt_bboxes, gt_labels, gt_difficults = list(), list(), list()
     for ii, (imgs, gt_bboxes_, gt_labels_, _) in tqdm(enumerate(dataloader)):
@@ -35,7 +35,7 @@ def eval(dataloader, faster_rcnn, test_num=10000):
         pred_scores += pred_scores_
         if ii == test_num: break
 
-    print("evaluating...")
+    # print("evaluating...")
     result = eval_detection_voc(
         pred_bboxes, pred_labels, pred_scores,
         gt_bboxes, gt_labels, gt_difficults,
@@ -45,7 +45,7 @@ def eval(dataloader, faster_rcnn, test_num=10000):
 
 def train(opt):
 
-    print('load data #################')
+    print('loading data')
     src_dataset = JACSDatasetBase(root=opt.train_root,
                               anno_file=opt.train_anno_file)
     
