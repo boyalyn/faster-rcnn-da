@@ -57,7 +57,7 @@ class DAImgHead(nn.Module):
 
         super(DAImgHead, self).__init__()
         # conv layers
-        self.conv1_da = nn.Conv2d(in_channels, 512, kernel_size=1, stride=1)
+        self.conv1_da = nn.Conv2d(in_channels, 512, kernel_size=3, stride=1,padding=1)
         self.conv2_da = nn.Conv2d(512, 1, kernel_size=1, stride=1)
         # initialize conv layers
         for l in [self.conv1_da, self.conv2_da]:
