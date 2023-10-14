@@ -75,6 +75,9 @@ def eval_detection_voc(
         gt_bboxes, gt_labels, gt_difficults,
         iou_thresh=iou_thresh)
 
+    print("prec: ", prec)
+    print("rec: ", rec)
+
     ap = calc_detection_voc_ap(prec, rec, use_07_metric=use_07_metric)
 
     return {'ap': ap, 'map': np.nanmean(ap)}
@@ -269,8 +272,7 @@ def calc_detection_voc_ap(prec, rec, use_07_metric=False):
         :obj:`None`, the corresponding value is set to :obj:`numpy.nan`.
 
     """
-    print("prec: ", prec)
-    print("rec: ", rec)
+
     n_fg_class = len(prec)
     ap = np.empty(n_fg_class)
     for l in six.moves.range(n_fg_class):
