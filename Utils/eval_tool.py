@@ -75,8 +75,8 @@ def eval_detection_voc(
         gt_bboxes, gt_labels, gt_difficults,
         iou_thresh=iou_thresh)
 
-    print("prec: ", prec)
-    print("rec: ", rec)
+    # print("prec: ", prec)
+    # print("rec: ", rec)
 
     ap = calc_detection_voc_ap(prec, rec, use_07_metric=use_07_metric)
 
@@ -162,6 +162,9 @@ def calc_detection_voc_prec_rec(
             six.moves.zip(
                 pred_bboxes, pred_labels, pred_scores,
                 gt_bboxes, gt_labels, gt_difficults):
+        
+        print("pred_label: ", pred_label)
+        print("gt_label: ", gt_label)
 
         if gt_difficult is None:
             gt_difficult = np.zeros(gt_bbox.shape[0], dtype=bool)
