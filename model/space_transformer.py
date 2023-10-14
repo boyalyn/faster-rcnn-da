@@ -8,10 +8,10 @@ class Deformer(nn.Module):
         super(Deformer, self).__init__()
         # Spatial transformer localization-network
         self.localization = nn.Sequential(
-            nn.Conv2d(1, 32, kernel_size=3, padding=1),
+            nn.Conv2d(1, 10, kernel_size=3, padding=1),
             # nn.MaxPool2d(2, stride=2),
             nn.ReLU(True),
-            nn.Conv2d(32, 10, kernel_size=4),
+            nn.Conv2d(10, 10, kernel_size=4),
             # nn.MaxPool2d(2, stride=2),
             nn.ReLU(True)
         )
