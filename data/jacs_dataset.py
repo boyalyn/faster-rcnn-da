@@ -8,7 +8,7 @@ from torch.utils.data import Dataset
 
 class JACSDatasetBase(Dataset):
 
-    def __init__(self, root, anno_file, size=(512,512), domain_label="source"):
+    def __init__(self, root, anno_file, size=(256,256), domain_label="source"):
 
         self.root = root
         anno_dict = json.load(open(os.path.join(root,anno_file),'r'))
