@@ -16,7 +16,7 @@ from Utils.eval_tool import eval_detection_voc
 
 from Configs.Config import Config
 
-torch.set_default_datatype(torch.float32)
+# torch.set_default_datatype(torch.float32)
 
 
 def eval(dataloader, faster_rcnn, test_num=10000):

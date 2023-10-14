@@ -15,7 +15,7 @@ from Utils.vis_tool import Visualizer
 from torchnet.meter import ConfusionMeter, AverageValueMeter
 from Configs.Config import Config
 
-torch.set_default_datatype(torch.float32)
+# torch.set_default_datatype(torch.float32)
 
 opt = Config().get_opt()
 
