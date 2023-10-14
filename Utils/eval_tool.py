@@ -11,7 +11,7 @@ from model.utils.bbox_tools import bbox_iou
 def eval_detection_voc(
         pred_bboxes, pred_labels, pred_scores, gt_bboxes, gt_labels,
         gt_difficults=None,
-        iou_thresh=0.2, use_07_metric=False):
+        iou_thresh=0.3, use_07_metric=False):
     """Calculate average precisions based on evaluation code of PASCAL VOC.
 
     This function evaluates predicted bounding boxes obtained from a dataset
