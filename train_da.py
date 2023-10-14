@@ -45,7 +45,7 @@ def eval(dataloader, faster_rcnn, test_num=10000):
 
 def train(opt):
 
-    print('load data')
+    print('load data #################')
     src_dataset = JACSDatasetBase(root=opt.train_root,
                               anno_file=opt.train_anno_file)
     
