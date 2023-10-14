@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-torch.set_default_datatype(torch.float32)
+# torch.set_default_datatype(torch.float32)
 
 
 class Deformer(nn.Module):
