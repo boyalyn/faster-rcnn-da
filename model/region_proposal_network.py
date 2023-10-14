@@ -50,6 +50,11 @@ class RegionProposalNetwork(nn.Module):
             proposal_creator_params=dict(),
     ):
         super(RegionProposalNetwork, self).__init__()
+        ratios = [
+            nn.Parameter(0.5,requires_grad=True),
+            nn.Parameter(1,requires_grad=True),
+            nn.Parameter(2,requires_grad=True)
+        ]
         self.anchor_base = generate_anchor_base(
             anchor_scales=anchor_scales, ratios=ratios)
         self.feat_stride = feat_stride
