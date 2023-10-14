@@ -68,7 +68,7 @@ class RegionProposalNetwork(nn.Module):
         normal_init(self.loc, 0, 0.01)
 
     def forward(self, x, img_size, scale=1.):
-        print("ratios: ", self.ratios)
+
         """Forward Region Proposal Network.
 
         Here are notations.
