@@ -9,7 +9,7 @@ from model.faster_rcnn import FasterRCNN
 from Utils import array_tool as at
 from Utils.config import opt
 from model.space_transformer import Deformer
-t.set_default_datatype(t.float32)
+# t.set_default_datatype(t.float32)
 
 
 def decom_vgg16():
