@@ -44,7 +44,7 @@ class DANN(FasterRCNN):
             head,
         )
 
-        self.da_head = DAHead(512, 512*7*7)
+        self.da_head = DAHead(512)
 
         self.ins_loss = DaInsLoss()
         self.img_loss = DaImgLoss()
