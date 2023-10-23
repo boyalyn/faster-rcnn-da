@@ -32,9 +32,9 @@ def decom_vgg16():
     classifier = nn.Sequential(*classifier)
 
     # freeze top4 conv
-    # for layer in features[:10]:
-    #     for p in layer.parameters():
-    #         p.requires_grad = False
+    for layer in features[:10]:
+        for p in layer.parameters():
+            p.requires_grad = False
 
     return nn.Sequential(*features), classifier
 
@@ -151,13 +151,14 @@ class VGG16RoIHead(nn.Module):
 
         pool = self.roi(x, indices_and_rois)
 
-        pool = self.deformer1(pool.view(-1,1,7,7)).view(-1,512,7,7)
+        # pool = self.deformer1(pool.view(-1,1,7,7)).view(-1,512,7,7)
         # pool = self.defo_conv(pool)
         # pool = self.deformer2(pool.view(-1,1,7,7)).view(-1,512,7,7)
         # pool = self.deformer3(pool.view(-1,1,7,7)).view(-1,512,7,7)
-
-        pool = pool.view(pool.size(0), -1)
+        # pool = pool.view(pool.size(0), -1)
+        print(pool.shape)
         fc7 = self.classifier(pool)
+        print(fc7.shape)
         roi_cls_locs = self.cls_loc(fc7)
         roi_scores = self.score(fc7)
 
