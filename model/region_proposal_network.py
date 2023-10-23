@@ -60,9 +60,10 @@ class RegionProposalNetwork(nn.Module):
         self.score = nn.Conv2d(mid_channels, n_anchor * 2, 1, 1, 0)
         self.loc = nn.Conv2d(mid_channels, n_anchor * 4, 1, 1, 0)
         self.loc_shift = nn.Sequential(
-            nn.Conv2d(mid_channels, n_anchor * 4, 3, 1, 1),
+            nn.Conv2d(mid_channels, 128, 1, 1, 0),
             nn.ReLU(inplace=True),
-            nn.Conv2d(n_anchor * 4, n_anchor * 4, 3, 1, 1)
+            nn.Flatten(),
+            nn.Linear(128*16*16, n_anchor*4*16*16),
         )
         normal_init(self.conv1, 0, 0.01)
         normal_init(self.score, 0, 0.01)
@@ -118,7 +119,7 @@ class RegionProposalNetwork(nn.Module):
 
         rpn_locs = self.loc(h)
         if domain_label == "target":
-            rpn_locs += self.loc_shift(h)
+            rpn_locs += self.loc_shift(h).view(-1, n_anchor*4, 16, 16)
             self.loc.weight.requires_grad = False
         # UNNOTE: check whether need contiguous
         # A: Yes
