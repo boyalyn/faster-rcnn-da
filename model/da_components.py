@@ -86,9 +86,9 @@ class DAInsHead(nn.Module):
 
         super(DAInsHead, self).__init__()
         # fully-connected layers
-        self.fc1_da = nn.Linear(in_channels, 1024)
-        self.fc2_da = nn.Linear(1024, 1024)
-        self.fc3_da = nn.Linear(1024, 1)
+        self.fc1_da = nn.Linear(in_channels, 512)
+        self.fc2_da = nn.Linear(512, 256)
+        self.fc3_da = nn.Linear(256, 1)
         # initialize fully-connected layers
         for l in [self.fc1_da, self.fc2_da]:
             nn.init.normal_(l.weight, std=0.01)
