@@ -12,7 +12,8 @@ import torch
 from torch import nn
 from data.dataset import preprocess
 from torch.nn import functional as F
-from Configs.Config import Config as opt
+from Configs.Config import Config
+opt = Config()
 # torch.set_default_datatype(torch.float32)
 
 DEVICE = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
