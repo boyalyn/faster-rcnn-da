@@ -19,7 +19,8 @@ class Config:
         self.interval = 1
 
         """ learning rate """
-        self.lr = 1e-5
+        self.lr = 1e-3
+        self.use_adam = True # Use Adam optimizer
 
         """ GPU or CPU ? """
         self.device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
