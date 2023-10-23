@@ -86,15 +86,16 @@ class DAInsHead(nn.Module):
 
         super(DAInsHead, self).__init__()
         # fully-connected layers
+        
         self.fc1_da = nn.Linear(in_channels, 512)
         self.fc2_da = nn.Linear(512, 256)
         self.fc3_da = nn.Linear(256, 1)
         # initialize fully-connected layers
-        for l in [self.fc1_da, self.fc2_da]:
-            nn.init.normal_(l.weight, std=0.01)
-            nn.init.constant_(l.bias, 0)
-        nn.init.normal_(self.fc3_da.weight, std=0.05)
-        nn.init.constant_(self.fc3_da.bias, 0)
+        # for l in [self.fc1_da, self.fc2_da]:
+        #     nn.init.normal_(l.weight, std=0.01)
+        #     nn.init.constant_(l.bias, 0)
+        # nn.init.normal_(self.fc3_da.weight, std=0.05)
+        # nn.init.constant_(self.fc3_da.bias, 0)
 
     def forward(self, x):
 
