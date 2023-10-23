@@ -117,8 +117,9 @@ class VGG16RoIHead(nn.Module):
         self.spatial_scale = spatial_scale
         self.roi = RoIPool( (self.roi_size, self.roi_size),self.spatial_scale)
         self.deformer1 = Deformer()
-        self.deformer2 = Deformer()
-        self.deformer3 = Deformer()
+        self.defo_conv = nn.Conv2d(512,512,3,1,1)
+        # self.deformer2 = Deformer()
+        # self.deformer3 = Deformer()
 
     def forward(self, x, rois, roi_indices, return_latent=False):
 
@@ -151,7 +152,8 @@ class VGG16RoIHead(nn.Module):
         pool = self.roi(x, indices_and_rois)
 
         pool = self.deformer1(pool.view(-1,1,7,7)).view(-1,512,7,7)
-        pool = self.deformer2(pool.view(-1,1,7,7)).view(-1,512,7,7)
+        pool = self.defo_conv(pool)
+        # pool = self.deformer2(pool.view(-1,1,7,7)).view(-1,512,7,7)
         # pool = self.deformer3(pool.view(-1,1,7,7)).view(-1,512,7,7)
 
         pool = pool.view(pool.size(0), -1)
