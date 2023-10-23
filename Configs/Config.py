@@ -19,7 +19,7 @@ class Config:
         self.interval = 1
 
         """ learning rate """
-        self.lr = 1e-5
+        self.lr = 1e-4
         self.weight_decay = 0.0005
         self.use_adam = False # Use Adam optimizer
 
