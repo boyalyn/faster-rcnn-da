@@ -105,12 +105,12 @@ class FasterRCNNTrainer(nn.Module):
 
         features = self.faster_rcnn.extractor(imgs)
 
-        rpn_locs, rpn_scores, rois, roi_indices, anchor, ratios = \
+        rpn_locs, rpn_scores, rois, roi_indices, anchor = \
             self.faster_rcnn.rpn(features, img_size, scale)
         
         # domain adaptation head
         # print(f"ratios: {ratios}")
-        da_ins_loss, da_img_loss = self.faster_rcnn.da_forward(features, rois, roi_indices, domain_label, 1., ratios)
+        da_ins_loss, da_img_loss = self.faster_rcnn.da_forward(features, rois, roi_indices, domain_label, 1.)
         losses = [da_ins_loss, da_img_loss]
         
         if domain_label == "target":

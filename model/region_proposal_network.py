@@ -50,9 +50,9 @@ class RegionProposalNetwork(nn.Module):
             proposal_creator_params=dict(),
     ):
         super(RegionProposalNetwork, self).__init__()
-        self.ratios = t.tensor([0.5, 1, 2],requires_grad=True)
+        # self.ratios = t.tensor([0.5, 1, 2],requires_grad=True)
         self.anchor_base = generate_anchor_base(
-            anchor_scales=anchor_scales, ratios=self.ratios)
+            anchor_scales=anchor_scales, ratios=ratios)
         self.feat_stride = feat_stride
         self.proposal_layer = ProposalCreator(self, **proposal_creator_params)
         n_anchor = self.anchor_base.shape[0]
@@ -141,7 +141,7 @@ class RegionProposalNetwork(nn.Module):
         rois = t.from_numpy(rois).to(Config().device)
         roi_indices = t.from_numpy(roi_indices).to(Config().device)
 
-        return rpn_locs, rpn_scores, rois, roi_indices, anchor, self.ratios
+        return rpn_locs, rpn_scores, rois, roi_indices, anchor
 
 
 def _enumerate_shifted_anchor(anchor_base, feat_stride, height, width):
