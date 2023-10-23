@@ -59,12 +59,7 @@ class RegionProposalNetwork(nn.Module):
         self.conv1 = nn.Conv2d(in_channels, mid_channels, 3, 1, 1)
         self.score = nn.Conv2d(mid_channels, n_anchor * 2, 1, 1, 0)
         self.loc = nn.Conv2d(mid_channels, n_anchor * 4, 1, 1, 0)
-        # self.loc_shift = nn.Conv2d(mid_channels, n_anchor * 4, 1, 1, 0)
-        self.loc_shift = nn.Sequential(
-            nn.MaxPool2d(2),
-            # nn.Flatten(),
-            # nn.Linear(512*8*8, n_anchor * 4),
-        )
+        self.loc_shift = nn.Conv2d(mid_channels, n_anchor * 4, 3, 1, 1)
         normal_init(self.conv1, 0, 0.01)
         normal_init(self.score, 0, 0.01)
         normal_init(self.loc, 0, 0.01)
@@ -117,14 +112,9 @@ class RegionProposalNetwork(nn.Module):
         n_anchor = anchor.shape[0] // (hh * ww)
         h = F.relu(self.conv1(x),inplace=True)
 
-        print(h.shape)
         rpn_locs = self.loc(h)
-        print(rpn_locs.shape)
         if domain_label == "target":
-            # print("shift the locs")
-            shift = self.loc_shift(h)
-            shift = shift.view(n, -1, 4)
-            rpn_locs += shift
+            rpn_locs += self.loc_shift(h)
         # UNNOTE: check whether need contiguous
         # A: Yes
         rpn_locs = rpn_locs.permute(0, 2, 3, 1).contiguous().view(n, -1, 4)
