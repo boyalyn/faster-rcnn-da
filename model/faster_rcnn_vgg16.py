@@ -156,7 +156,7 @@ class VGG16RoIHead(nn.Module):
         # pool = self.deformer2(pool.view(-1,1,7,7)).view(-1,512,7,7)
         # pool = self.deformer3(pool.view(-1,1,7,7)).view(-1,512,7,7)
 
-        pool = ori_pool.view(pool.size(0), -1)
+        pool = ori_pool.view(ori_pool.size(0), -1)
         fc7 = self.classifier(pool)
         roi_cls_locs = self.cls_loc(fc7)
         roi_scores = self.score(fc7)
