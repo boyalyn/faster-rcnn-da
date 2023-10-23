@@ -116,7 +116,8 @@ class FasterRCNNTrainer(nn.Module):
         if domain_label == "target":
             # print("entering target domain...")
             losses += [torch.tensor(0)]*4
-            losses += [sum(losses)+5*losses[1]]
+            # losses += [sum(losses)+5*losses[1]]
+            losses += [sum(losses)]
             return LossTuple(*losses)
 
         # Since batch size is one, convert variables to singular form
