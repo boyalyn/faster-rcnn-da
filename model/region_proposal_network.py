@@ -119,9 +119,12 @@ class RegionProposalNetwork(nn.Module):
 
         print(h.shape)
         rpn_locs = self.loc(h)
+        print(rpn_locs.shape)
         if domain_label == "target":
             # print("shift the locs")
-            rpn_locs += self.loc_shift(h) 
+            shift = self.loc_shift(h)
+            shift = shift.view(n, -1, 4)
+            rpn_locs += shift
         # UNNOTE: check whether need contiguous
         # A: Yes
         rpn_locs = rpn_locs.permute(0, 2, 3, 1).contiguous().view(n, -1, 4)
