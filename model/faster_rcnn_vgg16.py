@@ -155,17 +155,16 @@ class VGG16RoIHead(nn.Module):
         # pool = self.defo_conv(pool)
         # pool = self.deformer2(pool.view(-1,1,7,7)).view(-1,512,7,7)
         # pool = self.deformer3(pool.view(-1,1,7,7)).view(-1,512,7,7)
-        # pool = pool.view(pool.size(0), -1)
-        print(pool.shape)
+
+        pool = pool.view(pool.size(0), -1)
         fc7 = self.classifier(pool)
-        print(fc7.shape)
         roi_cls_locs = self.cls_loc(fc7)
         roi_scores = self.score(fc7)
 
         if not return_latent:
             return roi_cls_locs, roi_scores
         else:
-            return roi_cls_locs, roi_scores, fc7
+            return roi_cls_locs, roi_scores, pool
 
 
 def normal_init(m, mean, stddev, truncated=False):
