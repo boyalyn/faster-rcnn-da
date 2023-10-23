@@ -99,6 +99,7 @@ class DAInsHead(nn.Module):
         nn.init.constant_(self.fc3_da.bias, 0)
 
     def forward(self, x):
+        x = x.view(-1, 512, 7, 7)
         x = F.relu(self.conv1(x),inplace=True)
         x = F.relu(self.conv2(x),inplace=True)
         x = x.view(x.size(0), -1)
