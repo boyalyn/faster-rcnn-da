@@ -115,6 +115,7 @@ class RegionProposalNetwork(nn.Module):
         rpn_locs = self.loc(h)
         if domain_label == "target":
             rpn_locs += self.loc_shift(h)
+            self.loc.weight.requires_grad = False
         # UNNOTE: check whether need contiguous
         # A: Yes
         rpn_locs = rpn_locs.permute(0, 2, 3, 1).contiguous().view(n, -1, 4)
