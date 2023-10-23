@@ -19,7 +19,7 @@ class Config:
         self.interval = 1
 
         """ learning rate """
-        self.lr = 1e-2
+        self.lr = 1e-5
 
         """ GPU or CPU ? """
         self.device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
