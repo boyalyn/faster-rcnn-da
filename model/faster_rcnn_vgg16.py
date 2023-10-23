@@ -164,7 +164,7 @@ class VGG16RoIHead(nn.Module):
         if not return_latent:
             return roi_cls_locs, roi_scores
         else:
-            return roi_cls_locs, roi_scores, ori_pool
+            return roi_cls_locs, roi_scores, ori_pool.view(-1,512,7,7)
 
 
 def normal_init(m, mean, stddev, truncated=False):
