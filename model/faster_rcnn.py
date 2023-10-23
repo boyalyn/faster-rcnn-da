@@ -286,7 +286,7 @@ class FasterRCNN(nn.Module):
         if opt.use_adam:
             self.optimizer = t.optim.Adam(params)
         else:
-            self.optimizer = t.optim.SGD(params, momentum=0.9)
+            self.optimizer = t.optim.SGD(params, momentum=0.5)
         return self.optimizer
 
     def scale_lr(self, decay=0.1):
