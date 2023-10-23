@@ -86,9 +86,9 @@ class DAInsHead(nn.Module):
 
         super(DAInsHead, self).__init__()
         # fully-connected layers
-        self.conv1 = nn.Conv2d(in_channels, 256, kernel_size=3, stride=1,padding=1)
-        self.conv2 = nn.Conv2d(256, 128, kernel_size=3, stride=1,padding=1)
-        self.fc1_da = nn.Linear(128*7*7, 512)
+        # self.conv1 = nn.Conv2d(in_channels, 256, kernel_size=3, stride=1,padding=1)
+        # self.conv2 = nn.Conv2d(256, 128, kernel_size=3, stride=1,padding=1)
+        self.fc1_da = nn.Linear(512*7*7, 512)
         self.fc2_da = nn.Linear(512, 256)
         self.fc3_da = nn.Linear(256, 1)
         # initialize fully-connected layers
@@ -99,10 +99,10 @@ class DAInsHead(nn.Module):
         nn.init.constant_(self.fc3_da.bias, 0)
 
     def forward(self, x):
-        x = x.view(-1, 512, 7, 7)
-        x = F.relu(self.conv1(x),inplace=True)
-        x = F.relu(self.conv2(x),inplace=True)
-        x = x.view(x.size(0), -1)
+        # x = x.view(-1, 512, 7, 7)
+        # x = F.relu(self.conv1(x),inplace=True)
+        # x = F.relu(self.conv2(x),inplace=True)
+        # x = x.view(x.size(0), -1)
 
         x = F.relu(self.fc1_da(x),inplace=True)
         x = F.dropout(x, p=0.5, training=self.training)
