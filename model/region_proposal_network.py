@@ -59,11 +59,12 @@ class RegionProposalNetwork(nn.Module):
         self.conv1 = nn.Conv2d(in_channels, mid_channels, 3, 1, 1)
         self.score = nn.Conv2d(mid_channels, n_anchor * 2, 1, 1, 0)
         self.loc = nn.Conv2d(mid_channels, n_anchor * 4, 1, 1, 0)
+        self.loc_shift = nn.Conv2d(n_anchor * 4, n_anchor * 4, 1, 1, 0)
         normal_init(self.conv1, 0, 0.01)
         normal_init(self.score, 0, 0.01)
         normal_init(self.loc, 0, 0.01)
 
-    def forward(self, x, img_size, scale=1.):
+    def forward(self, x, img_size, scale=1., domain_label="source"):
 
         """Forward Region Proposal Network.
 
@@ -112,6 +113,8 @@ class RegionProposalNetwork(nn.Module):
         h = F.relu(self.conv1(x),inplace=True)
 
         rpn_locs = self.loc(h)
+        if domain_label == "target":
+            rpn_locs += self.loc_shift(rpn_locs)
         # UNNOTE: check whether need contiguous
         # A: Yes
         rpn_locs = rpn_locs.permute(0, 2, 3, 1).contiguous().view(n, -1, 4)

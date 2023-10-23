@@ -106,7 +106,7 @@ class FasterRCNNTrainer(nn.Module):
         features = self.faster_rcnn.extractor(imgs)
 
         rpn_locs, rpn_scores, rois, roi_indices, anchor = \
-            self.faster_rcnn.rpn(features, img_size, scale)
+            self.faster_rcnn.rpn(features, img_size, scale, domain_label)
         
         # domain adaptation head
         # print(f"ratios: {ratios}")
