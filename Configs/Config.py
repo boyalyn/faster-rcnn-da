@@ -20,6 +20,7 @@ class Config:
 
         """ learning rate """
         self.lr = 1e-3
+        self.weight_decay = 0.0005
         self.use_adam = True # Use Adam optimizer
 
         """ GPU or CPU ? """
