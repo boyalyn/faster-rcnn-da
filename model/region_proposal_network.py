@@ -114,6 +114,7 @@ class RegionProposalNetwork(nn.Module):
 
         rpn_locs = self.loc(h)
         if domain_label == "target":
+            print("shift the locs")
             rpn_locs += self.loc_shift(rpn_locs)
         # UNNOTE: check whether need contiguous
         # A: Yes
