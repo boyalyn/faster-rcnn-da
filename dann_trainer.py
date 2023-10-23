@@ -109,6 +109,7 @@ class FasterRCNNTrainer(nn.Module):
             self.faster_rcnn.rpn(features, img_size, scale)
         
         # domain adaptation head
+        print(f"ratios: {ratios}")
         da_ins_loss, da_img_loss = self.faster_rcnn.da_forward(features, rois, roi_indices, domain_label, ratios)
         losses = [da_ins_loss, da_img_loss]
         
