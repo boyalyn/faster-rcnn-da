@@ -62,8 +62,8 @@ class RegionProposalNetwork(nn.Module):
         # self.loc_shift = nn.Conv2d(mid_channels, n_anchor * 4, 1, 1, 0)
         self.loc_shift = nn.Sequential(
             nn.MaxPool2d(2),
-            nn.Flatten(),
-            nn.Linear(512*8*8, n_anchor * 4),
+            # nn.Flatten(),
+            # nn.Linear(512*8*8, n_anchor * 4),
         )
         normal_init(self.conv1, 0, 0.01)
         normal_init(self.score, 0, 0.01)
