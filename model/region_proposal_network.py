@@ -117,6 +117,7 @@ class RegionProposalNetwork(nn.Module):
         n_anchor = anchor.shape[0] // (hh * ww)
         h = F.relu(self.conv1(x),inplace=True)
 
+        print(h.shape)
         rpn_locs = self.loc(h)
         if domain_label == "target":
             # print("shift the locs")
