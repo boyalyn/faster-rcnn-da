@@ -230,7 +230,7 @@ def generate_anchor_base(base_size=16, ratios=[0.5, 1, 2],
     py = base_size / 2.
     px = base_size / 2.
     # print(ratios.shape)
-    # ratios = [ratios[0], ratios[1], ratios[2]]
+    ratios = np.random.rand(3)
     anchor_base = np.zeros((len(ratios) * len(anchor_scales), 4),
                            dtype=np.float32)
     for i in six.moves.range(len(ratios)):
