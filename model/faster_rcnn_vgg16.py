@@ -149,14 +149,14 @@ class VGG16RoIHead(nn.Module):
         xy_indices_and_rois = indices_and_rois[:, [0, 2, 1, 4, 3]]
         indices_and_rois =  xy_indices_and_rois.contiguous()
 
-        pool = self.roi(x, indices_and_rois)
+        ori_pool = self.roi(x, indices_and_rois)
 
         # pool = self.deformer1(pool.view(-1,1,7,7)).view(-1,512,7,7)
         # pool = self.defo_conv(pool)
         # pool = self.deformer2(pool.view(-1,1,7,7)).view(-1,512,7,7)
         # pool = self.deformer3(pool.view(-1,1,7,7)).view(-1,512,7,7)
 
-        pool = pool.view(pool.size(0), -1)
+        pool = ori_pool.view(pool.size(0), -1)
         fc7 = self.classifier(pool)
         roi_cls_locs = self.cls_loc(fc7)
         roi_scores = self.score(fc7)
@@ -164,7 +164,7 @@ class VGG16RoIHead(nn.Module):
         if not return_latent:
             return roi_cls_locs, roi_scores
         else:
-            return roi_cls_locs, roi_scores, pool
+            return roi_cls_locs, roi_scores, ori_pool
 
 
 def normal_init(m, mean, stddev, truncated=False):
