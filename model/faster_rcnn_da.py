@@ -51,7 +51,7 @@ class DANN(FasterRCNN):
         self.cons_loss = DaConsistLoss()
 
     
-    def da_forward(self, h, rois, roi_indices, domain_label, scale=1.):
+    def da_forward(self, h, rois, roi_indices, domain_label, scale=1., ratios=[0.5, 1, 2]):
 
         # img_size = x.shape[2:]
 
@@ -63,8 +63,9 @@ class DANN(FasterRCNN):
         roi_cls_locs, roi_scores, fc7 = self.head(
             h, rois, roi_indices, return_latent=True)
 
+        ratios = torch.cat(ratios, dim=0).reshape(1,-1)
         # da_img_features, da_img_consist_features, da_ins_features, da_ins_center, da_ins_consist_features = self.da_head(fc7, [h])
-        da_outputs = self.da_head(fc7,[h]) # caution !!!!!!!!!!!!!!
+        da_outputs = self.da_head(torch.cat([fc7,ratios],dim=1),[h]) # caution !!!!!!!!!!!!!!
         da_img_features, da_img_consist_features, da_ins_features, da_ins_center, da_ins_consist_features = da_outputs
 
         # create domain labels

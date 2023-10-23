@@ -145,7 +145,7 @@ class RegionProposalNetwork(nn.Module):
         rois = t.from_numpy(rois).to(Config().device)
         roi_indices = t.from_numpy(roi_indices).to(Config().device)
 
-        return rpn_locs, rpn_scores, rois, roi_indices, anchor
+        return rpn_locs, rpn_scores, rois, roi_indices, anchor, self.ratios
 
 
 def _enumerate_shifted_anchor(anchor_base, feat_stride, height, width):
