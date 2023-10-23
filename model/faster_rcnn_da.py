@@ -51,7 +51,7 @@ class DANN(FasterRCNN):
         self.cons_loss = DaConsistLoss()
 
     
-    def da_forward(self, h, rois, roi_indices, domain_label, scale=1., ratios=[0.5, 1, 2]):
+    def da_forward(self, h, rois, roi_indices, domain_label, scale=1., ratios=None):
 
         # img_size = x.shape[2:]
 
