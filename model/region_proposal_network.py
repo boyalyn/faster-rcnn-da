@@ -119,7 +119,7 @@ class RegionProposalNetwork(nn.Module):
 
         rpn_locs = self.loc(h)
         if domain_label == "target":
-            fft = t.fft.fft2(h,dim=[2,3])
+            fft = t.abs(t.fft.fft2(h,dim=[2,3]))
             rpn_locs += self.loc_shift(fft).view(-1, n_anchor*4, 16, 16)
             # self.loc.weight.requires_grad = False
         # UNNOTE: check whether need contiguous
