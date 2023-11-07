@@ -35,7 +35,7 @@ class JACSDatasetBase(Dataset):
 
         for anno_dict in anno_list:
             img_id = anno_dict["image_id"]
-            if img_id != 0 & domain_label == "target":
+            if img_id != 0 and domain_label == "target":
                 continue
             bbox = anno_dict["bbox"]
             cls = anno_dict["category_id"]
