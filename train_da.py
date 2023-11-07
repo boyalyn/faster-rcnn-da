@@ -49,7 +49,8 @@ def train(opt):
 
     print('loading data')
     src_dataset = JACSDatasetBase(root=opt.train_root,
-                              anno_file=opt.train_anno_file)
+                              anno_file=opt.train_anno_file,
+                              domain_label="source")
     
     src_dataloader = data_.DataLoader(src_dataset, \
                                   batch_size=1, \
@@ -58,7 +59,8 @@ def train(opt):
                                   num_workers=opt.num_workers)
     
     dst_dataset = JACSDatasetBase(root=opt.test_root,
-                              anno_file=opt.test_anno_file)
+                              anno_file=opt.test_anno_file,
+                              domain_label="target")
     dst_dataloader = data_.DataLoader( dst_dataset,
                                        batch_size=1,
                                        num_workers=opt.test_num_workers,
