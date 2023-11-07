@@ -25,8 +25,8 @@ class JACSDatasetBase(Dataset):
 
         for img_dict in img_list:
             key = img_dict["id"]
-            if key != 0:
-                continue
+            # if key != 0:
+            #     continue
             val = {"file_name": img_dict["file_name"],
                    "height": img_dict["height"],
                    "width": img_dict["width"],
@@ -35,8 +35,8 @@ class JACSDatasetBase(Dataset):
 
         for anno_dict in anno_list:
             img_id = anno_dict["image_id"]
-            if img_id != 0:
-                continue
+            # if img_id != 0:
+            #     continue
             bbox = anno_dict["bbox"]
             cls = anno_dict["category_id"]
             cur_dict = {"bbox": bbox,
