@@ -59,7 +59,7 @@ def train(**kwargs):
                                   # pin_memory=True,
                                   num_workers=opt.num_workers)
     
-    testset = JACSDatasetBase(root="/Users/boyaliu/Projects/JACS/Database/data_FHPB/Testset",
+    testset = JACSDatasetBase(root="/Users/boyaliu/Projects/JACS/Database/data_FHPB/TestsetLR",
                               anno_file="testset.json")
     test_dataloader = data_.DataLoader(testset,
                                        batch_size=1,
