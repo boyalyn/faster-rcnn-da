@@ -41,5 +41,8 @@ class Config:
         self.test_root = "/content/drive/MyDrive/AI_for_materials/JACS/Database/data_FHPB/TestsetLR"
         self.test_anno_file = "testset.json"
 
+        # ADAM
+        self.use_adam = True
+
     def get_opt(self):
         return self
