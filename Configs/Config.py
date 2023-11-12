@@ -42,7 +42,7 @@ class Config:
         self.test_anno_file = "testset.json"
 
         # ADAM
-        self.use_adam = True
+        self.use_adam = False
 
     def get_opt(self):
         return self
